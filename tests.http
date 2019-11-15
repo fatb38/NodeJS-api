@@ -1,0 +1,46 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection) or
+# paste cURL into the file and request will be converted to HTTP Request format.
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+
+// Here are tests of all possible requests
+
+GET http://localhost:3000/api/bikes
+Accept: application/json
+
+###
+GET http://localhost:3000/api/bikes/87beff15-ba80-4449-b9a3-36f0881a1c22
+Accept: application/json
+
+###
+POST http://localhost:3000/api/bikes/new
+Content-Type: application/json
+
+{
+  "id": "37b1c7hg-3b34-4786-8704-bb3e5a3cb810",
+  "name": "V10",
+  "brand": "Santa-Cruz",
+  "year": 2018,
+  "type": "DH"
+}
+
+###
+PUT http://localhost:3000/api/bikes/edit/37b1c7hg-3b34-4786-8704-bb3e5a3cb810
+Content-Type: application/json
+
+{
+  "id": "37b1c7hg-3b34-4786-8704-bb3e5a3cb810",
+  "name": "V10-version3",
+  "brand": "Santa-Cruz",
+  "year": 2019,
+  "type": "DH"
+}
+
+###
+DELETE http://localhost:3000/api/bikes/delete/37b1c7hg-3b34-4786-8704-bb3e5a3cb810
+Content-Type: application/json
+
+###

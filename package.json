@@ -1,0 +1,22 @@
+{
+  "name": "bikes-api",
+  "version": "1.0.0",
+  "description": "This is a Rest API made with NodeJS which allows to manage a list of bikes",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fatb38/NodeJS-api.git"
+  },
+  "author": "fatb38",
+  "homepage": "https://github.com/fatb38/NodeJS-api#readme",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "morgan": "~1.9.1",
+    "nodemon": "^1.19.4"
+  },
+  "dev": "node_modules/.bin/nodemon -e js"
+}
