@@ -1,6 +1,6 @@
 {
   "name": "bikes-api",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "This is a Rest API made with NodeJS which allows to manage a list of bikes",
   "repository": {
     "type": "git",

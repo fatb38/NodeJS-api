@@ -32,7 +32,7 @@ router.get('/:id', async (req, res) => {
 });
 
 /* POST a new bike */
-router.post('/new', m.checkBikeModel, async (req, res) => {
+router.post('/', m.checkBikeModel, async (req, res) => {
     await bike.insertBike(req.body)
         .then(bike => res.status(201).json({
             message: `The bike #${bike.id} has been created !`,
@@ -42,7 +42,7 @@ router.post('/new', m.checkBikeModel, async (req, res) => {
 });
 
 /* Update (PUT) a bike */
-router.put('/edit/:id', m.checkBikeModel, async (req, res) => {
+router.put('/:id', m.checkBikeModel, async (req, res) => {
     const id = req.params.id;
 
     await bike.updateBike(id, req.body)
@@ -59,13 +59,11 @@ router.put('/edit/:id', m.checkBikeModel, async (req, res) => {
 });
 
 /* DELETE a bike */
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     const id = req.params.id;
 
     await bike.deleteBike(id)
-        .then(() => res.json({
-            message: `The bike #${id} has been deleted !`
-        }))
+        .then(() => res.status(204))
         .catch(err => {
             if (err.status) {
                 res.status(err.status).json({message: err.message})

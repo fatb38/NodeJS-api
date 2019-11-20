@@ -38,15 +38,16 @@ Request      | Response
 ------------ | -------------
 `GET /api/bikes` | Return the list of all bikes
 `GET /api/bikes/{id}` | Return the specified bike with id
-`POST /api/bikes/new` | Add a new bike
-`PUT /api/bikes/edit/{id}` | Modify the specified bike with id
-`DELETE /api/bikes/delete/{id}` | Delete the specified bike with id
+`POST /api/bikes/` | Add a new bike
+`PUT /api/bikes/{id}` | Modify the specified bike with id
+`DELETE /api/bikes/{id}` | Delete the specified bike with id
 
 ## Status Codes
 Code  | Status  | Information
 ----- | ------- | -----------
-`201` | *The bike has been created* | Success, resource was created.
+`201` | *The bike has been created* | Success, resource has been created.
 `202` | *No bikes available* | Success but the Json file is empty. There is no more data.
+`204` | *No Content* | Success, the resource has been deleted.
 `400` | *Fields are not good* | The body of your request (POST or PUT) is wrong. The API needs Json content with the right properties according to the bike Model (name, brand, year, type).
 `404` | *This ID does not exist* | You enter a wrong Id that doesn't match with any bike.
 `500` | *Server Error* | 
