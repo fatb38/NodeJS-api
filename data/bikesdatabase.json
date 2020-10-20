@@ -3,7 +3,7 @@
     "id": "cfc47736-9a27-4dbe-9d65-2055aced6aef",
     "name": "Audacio 400",
     "brand": "Lapierre",
-    "year": 2014,
+    "year": 2017,
     "type": "racing"
   },
   {
@@ -49,5 +49,12 @@
     "brand": "Santa-Cruz",
     "year": 2019,
     "type": "Enduro"
+  },
+  {
+    "name": "Slayer",
+    "brand": "Rocky Mountain",
+    "type": "Enduro",
+    "year": "2019",
+    "id": "2e22b045-76ea-494c-a1ef-aaf5fa5c3252"
   }
 ]

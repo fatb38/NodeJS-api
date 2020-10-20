@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { getBikes, getSingleBike, insertBike, updateBike, deleteBike } = require('../models/bike.model')
+const { getBikes, getBike, insertBike, updateBike, deleteBike } = require('../models/Bike')
 const { checkBikeModel } = require('../helpers/middlewares')
 
 
@@ -19,7 +19,7 @@ router.route('/')
     try {
       const newBike = await insertBike(req.body)
       res.status(201).json({
-        message: `The bike #${ newBike.id } has been created !`,
+        message: `Bike successfully created !`,
         content: newBike
       })
     } catch (err) {
@@ -31,7 +31,7 @@ router.route('/:id')
   /* GET a single bike with id */
   .get(async (req, res) => {
     try {
-      const bike = await getSingleBike(req.params.id)
+      const bike = await getBike(req.params.id)
       res.json(bike)
     } catch (err) {
       res.status(err.status || 500).json(err.message)
