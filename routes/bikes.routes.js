@@ -1,75 +1,62 @@
-const express = require('express');
-const router = express.Router();
-const bike = require('../models/bike.model');
-const m = require('../helpers/middlewares');
+const express = require('express')
+const router = express.Router()
+const { getBikes, getSingleBike, insertBike, updateBike, deleteBike } = require('../models/bike.model')
+const { checkBikeModel } = require('../helpers/middlewares')
 
-/* GET All bikes */
-router.get('/', async (req, res) => {
-    await bike.getBikes()
-        .then(bikes => res.json(bikes))
-        .catch(err => {
-            if (err.status) {
-                res.status(err.status).json({message: err.message})
-            } else {
-                res.status(500).json({message: err.message})
-            }
-        })
-});
 
-/* GET a single bike with id */
-router.get('/:id', async (req, res) => {
-    const id = req.params.id;
+router.route('/')
+  /* GET All bikes */
+  .get(async (req, res) => {
+    try {
+      const bikes = await getBikes()
+      res.json(bikes)
+    } catch (err) {
+      res.status(err.status || 500).json(err.message)
+    }
+  })
+  /* POST a new bike */
+  .post(checkBikeModel, async (req, res) => {
+    try {
+      const newBike = await insertBike(req.body)
+      res.status(201).json({
+        message: `The bike #${ newBike.id } has been created !`,
+        content: newBike
+      })
+    } catch (err) {
+      res.status(err.status || 500).json(err.message)
+    }
+  })
 
-    await bike.getSingleBike(id)
-        .then(bike => res.json(bike))
-        .catch(err => {
-            if (err.status) {
-                res.status(err.status).json({message: err.message})
-            } else {
-                res.status(500).json({message: err.message})
-            }
-        })
-});
+router.route('/:id')
+  /* GET a single bike with id */
+  .get(async (req, res) => {
+    try {
+      const bike = await getSingleBike(req.params.id)
+      res.json(bike)
+    } catch (err) {
+      res.status(err.status || 500).json(err.message)
+    }
+  })
+  /* Update (PUT) a bike */
+  .put(checkBikeModel, async (req, res) => {
+    try {
+      const bike = await updateBike(req.params.id, req.body)
+      res.json({
+        message: `bike has been updated !`,
+        content: bike
+      })
+    } catch (err) {
+      res.status(err.status || 500).json(err.message)
+    }
+  })
+  /* DELETE a bike */
+  .delete(async (req, res) => {
+    try {
+      await deleteBike(req.params.id)
+      res.status(204)
+    } catch (err) {
+      res.status(err.status || 500).json(err.message)
+    }
+  })
 
-/* POST a new bike */
-router.post('/', m.checkBikeModel, async (req, res) => {
-    await bike.insertBike(req.body)
-        .then(bike => res.status(201).json({
-            message: `The bike #${bike.id} has been created !`,
-            content: bike
-        }))
-        .catch(err => res.status(500).json({message: err.message}))
-});
-
-/* Update (PUT) a bike */
-router.put('/:id', m.checkBikeModel, async (req, res) => {
-    const id = req.params.id;
-
-    await bike.updateBike(id, req.body)
-        .then(bike => res.json({
-            message: `The bike #${id} has been updated !`,
-            content: bike
-        }))
-        .catch(err => {
-            if (err.status) {
-                res.status(err.status).json({message: err.message})
-            }
-            res.status(500).json({message: err.message})
-        })
-});
-
-/* DELETE a bike */
-router.delete('/:id', async (req, res) => {
-    const id = req.params.id;
-
-    await bike.deleteBike(id)
-        .then(() => res.status(204))
-        .catch(err => {
-            if (err.status) {
-                res.status(err.status).json({message: err.message})
-            }
-            res.status(500).json({message: err.message})
-        })
-});
-
-module.exports = router;
+module.exports = router
